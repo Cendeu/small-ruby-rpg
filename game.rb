@@ -1,11 +1,21 @@
 Dir["./*.rb"].each {|file| require_relative file}
+require 'io/console'
 
 class Game
-    ACTIONS = [:north, :south, :east, :west, :look, :fight, :take, :status, :attack, :test]
+    UP = "\e[A"
+    DOWN = "\e[B"
+    RIGHT = "\e[C"
+    LEFT = "\e[D"
+    SPACE = " "
+    T_KEY = "t"
+    L_KEY = "l"
+
+    ACTIONS = ["\e[A", "\e[B", "\e[C", "\e[D", " ", "t", "l"]
 
     def initialize
         @world = World.new
         @player = Player.new
+        @painter = UI.new
 
         start_game
     end
@@ -14,10 +24,11 @@ class Game
     def start_game
         while @player.alive?
             @current_room = @world.get_room_of(@player)
-
+            @painter.clear
+            @painter.paint_map(@world.rooms, @player)
             print_status
 
-            action = take_player_input
+            action = read_char
             next unless ACTIONS.include? action
 
             take_action(action)
@@ -26,7 +37,7 @@ class Game
 
     def take_player_input
         print "What action do you want to take? "
-        gets.chomp.to_sym
+        STDIN.getch #TEMP
     end
 
     def print_status
@@ -42,22 +53,38 @@ class Game
         case action
         when :look
             print_status
-        when :north
+        when "\e[D"
             @world.move_entity_north(@player)
-        when :south
+        when "\e[C"
             @world.move_entity_south(@player)
-        when :east
+        when "\e[B"
             @world.move_entity_east(@player)
-        when :west
+        when "\e[A"
             @world.move_entity_west(@player)
-        when :fight, :take, :attack
+        when " "
             @current_room.interact(@player)
-        when :status
+        when "l"
             @player.print_status
-        when :test
-            painter = UI.new
-            painter.paint_map(@world.rooms)
+        when "t"
+            exit
         end
+    end
+
+
+    def read_char
+        STDIN.echo = false
+        STDIN.raw!
+    
+        input = STDIN.getc.chr
+        if input == "\e" then
+            input << STDIN.read_nonblock(3) rescue nil
+            input << STDIN.read_nonblock(2) rescue nil
+        end
+    ensure
+        STDIN.echo = true
+        STDIN.cooked!
+    
+        return input
     end
 
 end

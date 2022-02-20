@@ -4,7 +4,15 @@ class World
     WORLD_HEIGHT = 10
 
     def initialize
-        @rooms = Array.new(WORLD_HEIGHT, Array.new(WORLD_WIDTH, Room.new))
+        @rooms = []
+        temp_row = []
+        WORLD_HEIGHT.times.each do
+            WORLD_WIDTH.times.each do
+                temp_row << Room.new
+            end
+            @rooms << temp_row
+            temp_row = []
+        end
     end
 
     def move_entity_north(entity)
