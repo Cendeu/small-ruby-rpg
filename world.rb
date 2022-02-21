@@ -48,7 +48,13 @@ class Room
     def interact(player)
         if @content
             @content.interact(player)
-            @content = nil
+            if @content.class != Monster
+                @content = nil
+                @symbol = nil
+            elsif not @content.alive?
+                @content = nil
+                @symbol = nil
+            end
         end
     end
 

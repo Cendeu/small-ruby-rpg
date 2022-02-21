@@ -1,6 +1,6 @@
 module Combatable
     BASE_STATS = {
-        max_hit_points: 10,
+        max_hit_points: 10 + rand(20),
         attack_power: 1
     }
 
@@ -10,6 +10,7 @@ module Combatable
 
     def initialize_stats(stats)
         @stats = stats
+        @max_hit_points = stats[:max_hit_points]
         @hit_points = stats[:max_hit_points]
         @attack_power = stats[:attack_power]
     end

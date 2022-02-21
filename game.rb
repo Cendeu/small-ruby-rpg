@@ -34,11 +34,6 @@ class Game
         end
     end
 
-    def take_player_input
-        print "What action do you want to take? "
-        STDIN.getch #TEMP
-    end
-
     def print_status
         puts "You are at map coordinates [#{@player.x_coord}, #{@player.y_coord}]"
 

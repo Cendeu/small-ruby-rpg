@@ -14,7 +14,8 @@ class UI
             MAP_PLAYER: "\u1330".yellow,
             MAP_POTION: "\u26B1".cyan,
             MAP_MONSTER: "\u046A".red,
-            MAP_SWORD: "\u2540".white
+            MAP_SWORD: "\u2540".white,
+            MAP_GRASS: [",", ".", "'", "\u02C0", "\u02C1", "\u02D5"]
         }
     end
 
@@ -74,7 +75,7 @@ class UI
             when Monster
                 return @painter[:MAP_MONSTER]
             when NilClass
-                [",", ".", "'", "\u02C0", "\u02C1", "\u02D5"].sample.light_green
+                @painter[:MAP_GRASS].sample.light_green
             end
         end
     end

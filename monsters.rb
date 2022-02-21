@@ -8,7 +8,7 @@ class Monster
     end
 
     def to_s
-        "a horrible monster! Aaaaagh!"
+        "a horrible monster! HP:#{@hit_points} / #{@max_hit_points}"
     end
 
     def tile
@@ -16,10 +16,9 @@ class Monster
     end
 
     def interact(player)
-        while player.alive?
-            puts "You hit the monster for #{player.attack_power} points."
-            hurt(player.attack_power)
-            break unless alive?
+        puts "You hit the monster for #{player.attack_power} points."
+        hurt(player.attack_power)
+        if alive?
             player.hurt(@attack_power)
             puts "The monster hits you for #{@attack_power} points."
         end
