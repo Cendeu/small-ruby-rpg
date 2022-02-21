@@ -1,5 +1,6 @@
 Dir["./*.rb"].each {|file| require_relative file}
 require 'io/console'
+require 'colorize'
 
 class Game
     UP = "\e[A"
@@ -24,9 +25,7 @@ class Game
     def start_game
         while @player.alive?
             @current_room = @world.get_room_of(@player)
-            @painter.clear
-            @painter.paint_map(@world.rooms, @player)
-            print_status
+            @painter.print_gui(@world, @player)
 
             action = read_char
             next unless ACTIONS.include? action

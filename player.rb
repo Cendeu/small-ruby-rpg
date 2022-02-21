@@ -1,4 +1,5 @@
-require_relative "combatable.rb"
+require_relative "combatable"
+require "colorize"
 
 class Player
     include Combatable
@@ -15,10 +16,14 @@ class Player
     end
 
     def print_status
-        puts "*" * 80
-        puts "HP: #{@hit_points} / #{MAX_HIT_POINTS}"
-        puts "AP: #{attack_power}"
-        puts "*" * 80
+        print  "\u250F" + ("\u2501" * 30) + "\u2513\n"
+        print "\u2503"
+        print "\u2665".red #heart
+        print " HP: #{"%03d" % @hit_points} / #{MAX_HIT_POINTS}" + (" " * 15) +  "\u2503\n"
+        print "\u2503"
+        print "\u2694".white
+        print " AP: #{"%02d" % attack_power}" + (" " * 22) +  "\u2503\n"
+        puts "\u2517" + "\u2501" * 30 + "\u251B"
     end
 
 end

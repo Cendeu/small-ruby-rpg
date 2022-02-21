@@ -37,7 +37,7 @@ class World
 end
 
 class Room
-    attr_accessor :size, :content
+    attr_accessor :size, :content, :symbol
 
     def initialize
         @content = get_content
@@ -58,7 +58,7 @@ class Room
 
     private
     def get_content
-        [Monster, [Potion, Sword].sample].sample.new
+        [[Monster, [Potion, Sword].sample].sample.new, nil].sample
     end
 
     def get_size
