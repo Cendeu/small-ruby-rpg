@@ -47,7 +47,7 @@ class Room
 
     def interact(player)
         if @content
-            @content.interact(player)
+            phrase = @content.interact(player)
             if @content.class != Monster
                 @content = nil
                 @symbol = nil
@@ -55,6 +55,7 @@ class Room
                 @content = nil
                 @symbol = nil
             end
+            return phrase
         end
     end
 

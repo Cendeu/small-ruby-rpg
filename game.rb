@@ -17,6 +17,7 @@ class Game
         @world = World.new
         @player = Player.new
         @painter = UI.new
+        @last_action = ""
 
         start_game
     end
@@ -25,7 +26,7 @@ class Game
     def start_game
         while @player.alive?
             @current_room = @world.get_room_of(@player)
-            @painter.print_gui(@world, @player)
+            @painter.print_gui(@world, @player, @last_action)
 
             action = read_char
             next unless ACTIONS.include? action
@@ -56,7 +57,7 @@ class Game
         when "\e[A"
             @world.move_entity_west(@player)
         when " "
-            @current_room.interact(@player)
+            @last_action = @current_room.interact(@player)
         when "l"
             @player.print_status
         when "t"

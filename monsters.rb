@@ -16,11 +16,10 @@ class Monster
     end
 
     def interact(player)
-        puts "You hit the monster for #{player.attack_power} points."
         hurt(player.attack_power)
         if alive?
             player.hurt(@attack_power)
-            puts "The monster hits you for #{@attack_power} points."
         end
+        return "Hit monster for #{player.attack_power} points."
     end
 end

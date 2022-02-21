@@ -18,14 +18,14 @@ class Player
     end
 
     def print_status
-        print  "\u250F" + ("\u2501" * 30) + "\u2513\n"
+        print  "\u250F" + ("\u2501" * 52) + "\u2513\n"
         print "\u2503"
         print "\u2665".red #heart
-        print " HP: #{"%03d" % @hit_points} / #{MAX_HIT_POINTS}" + (" " * 15) +  "\u2503\n"
+        print " HP: #{"%03d" % @hit_points} / #{MAX_HIT_POINTS}" + (" " * 37) +  "\u2503\n"
         print "\u2503"
         print "\u2694"
-        print " AP: #{"%02d" % attack_power}" + (" " * 22) +  "\u2503\n"
-        puts "\u2517" + "\u2501" * 30 + "\u251B"
+        print " AP: #{"%02d" % attack_power}" + (" " * 44) +  "\u2503\n"
+        puts "\u2517" + "\u2501" * 52 + "\u251B"
     end
 
 end

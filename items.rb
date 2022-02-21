@@ -17,7 +17,9 @@ class Potion < Item
     end
 
     def perform_item_effect(player)
-        player.heal(rand(5) + 7)
+        heal_amount = rand(5) + 7
+        player.heal(heal_amount)
+        return "You heal #{heal_amount}"
     end
 
     def tile
@@ -31,7 +33,9 @@ class Sword < Item
     end
 
     def perform_item_effect(player)
-        player.attack_power += 1
+        ap_amount = rand(3)
+        player.attack_power += ap_amount
+        return "You gain #{ap_amount} AP!"
     end
     
     def tile

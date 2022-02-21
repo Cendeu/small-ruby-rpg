@@ -23,21 +23,24 @@ class UI
         print "\e[H\e[2J"
     end
 
-    def print_gui(world, player)
+    def print_gui(world, player, action)
         current_room = world.get_room_of(player)
         clear
         player.print_status
-        paint_map(world.rooms, player)
+        paint_map(world.rooms, player, action)
         puts current_room
         if current_room.content
             puts "You see #{current_room.content}."
         end
     end
 
-    def paint_map(map, player)
+    def paint_map(map, player, action)
         x = 0
         print @painter[:UI_TOP_LEFT]
         print @painter[:UI_HORIZONTAL] * 20
+        print @painter[:UI_TOP_RIGHT]
+        print @painter[:UI_TOP_LEFT]
+        print @painter[:UI_HORIZONTAL] * 30
         print @painter[:UI_TOP_RIGHT]
         print "\n"
         map.each do |row|
@@ -56,6 +59,19 @@ class UI
                 y += 1
             end
             print @painter[:UI_VERTICAL]
+            if x == 0
+                print @painter[:UI_VERTICAL]
+                print action
+                if action.length < 30
+                    print " " * (30 - action.length)
+                end
+                print @painter[:UI_VERTICAL]
+            end
+            if x == 1
+                print @painter[:UI_BOTTOM_LEFT]
+                print @painter[:UI_HORIZONTAL] * 30
+                print @painter[:UI_BOTTOM_RIGHT]
+            end
             print "\n"
             x += 1
         end
