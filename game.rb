@@ -11,17 +11,21 @@ class Game
     T_KEY = "t"
     L_KEY = "l"
 
-    ACTIONS = ["\e[A", "\e[B", "\e[C", "\e[D", " ", "t", "l"]
+    ACTIONS = ["\e[A", "\e[B", "\e[C", "\e[D", " ", "t"]
 
-    def initialize
-        @world = World.new
-        @player = Player.new
+    def initialize(world = World.new, player = Player.new, last_action = "Good Luck!")
+        @world = world
+        @player = player
         @painter = UI.new
-        @last_action = "Good Luck!"
+        @last_action = last_action
 
         title_screen
         start_game
     end
+
+
+
+
 
     private
     def start_game
@@ -60,8 +64,6 @@ class Game
             @world.move_entity_west(@player)
         when " "
             @last_action = @current_room.interact(@player)
-        when "l"
-            @player.print_status
         when "t"
             exit
         end
