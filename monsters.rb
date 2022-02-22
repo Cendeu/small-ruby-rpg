@@ -5,6 +5,9 @@ class Monster
 
     def initialize
         initialize_stats(BASE_STATS)
+        bonus_health = rand(20)
+        @hit_points += bonus_health
+        @max_hit_points += bonus_health
     end
 
     def to_s
@@ -20,6 +23,7 @@ class Monster
         if alive?
             player.hurt(@attack_power)
         end
-        return "Hit monster for #{player.attack_power} points."
+        return "Hit monster for #{player.attack_power} points." unless not alive?
+        return "You killed the Monster!"
     end
 end

@@ -17,8 +17,9 @@ class Game
         @world = World.new
         @player = Player.new
         @painter = UI.new
-        @last_action = ""
+        @last_action = "Good Luck!"
 
+        title_screen
         start_game
     end
 
@@ -26,6 +27,7 @@ class Game
     def start_game
         while @player.alive?
             @current_room = @world.get_room_of(@player)
+            @last_action = "" if @last_action == nil
             @painter.print_gui(@world, @player, @last_action)
 
             action = read_char
@@ -82,6 +84,12 @@ class Game
         return input
     end
 
+    def title_screen
+        title = Title_Screen.new
+        title.print_title_screen
+        keypress = read_char
+        
+    end
 end
 
 Game.new

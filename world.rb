@@ -52,7 +52,7 @@ class Room
                 @content = nil
                 @symbol = nil
             elsif not @content.alive?
-                @content = nil
+                @content = [nil, nil, nil, nil, [Potion, Sword].sample.new].sample
                 @symbol = nil
             end
             return phrase
